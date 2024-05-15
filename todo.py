@@ -86,7 +86,6 @@ btn1.place(x=30, y=140)
 def btn_click2():
     global todo_time
     global todo_schedule
-    global todo2
     todo_time, todo_schedule = txt1.get(), txt2.get()
     lb1_2 = tk.Label(text=f'時間: {todo_time}')
     lb1_2.place(x=60, y=100)
