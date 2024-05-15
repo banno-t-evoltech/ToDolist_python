@@ -1,8 +1,6 @@
 # encoding: utf-8
 import os
 import tkinter as tk
-from tkinter import filedialog
-from PIL import Image, ImageTk
 import tkinter.messagebox as mb
 
 app = tk.Tk()
