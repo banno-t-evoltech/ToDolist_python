@@ -3,12 +3,13 @@ import os
 import tkinter as tk
 from tkinter import filedialog
 from PIL import Image, ImageTk
+import tkinter.messagebox as mb
 
 app = tk.Tk()
-app.geometry('300x300')
+app.geometry('350x350')
 app.title('ToDoList')
 
-lb1_1 = tk.Label(text='日付と予定を入力してください')
+lb1_1 = tk.Label(text='日付と予定を入力して予定を追加ボタンを押してください')
 lb1_1.place(x=30,y=30)
 
 lbl = tk.Label(text='日付')
@@ -22,6 +23,20 @@ txt1.place(x=90, y=50)
 
 txt2 = tk.Entry(width=20)
 txt2.place(x=90, y=70)
+
+txt3 = tk.Entry(width=4)
+txt3.place(x=150, y=260)
+
+lb3 = tk.Label(text='ポップアップで< [番号]予定> を順番に出力します')
+lb3.place(x=50, y=170)
+
+lb4 = tk.Label(text='上記テキストボックスに入力した予定を追加します')
+lb4.place(x=50, y=230)
+
+lb5 = tk.Label(text='[番号]:')
+lb5.place(x=110, y=260)
+lb5 = tk.Label(text='"予定を出力"ボタンで出力した[番号]を削除します')
+lb5.place(x=50, y=290)
 
 #ファイル
 todofile = 'todo.txt'
@@ -65,7 +80,7 @@ if __name__ == '__main__':
 def btn_click1():
     for i, todo in enumerate(todo1):
         print(f"{i}: {todo}")
-
+        mb.showinfo(f'予定を出力', f"[{i}]{todo}") 
 btn1 = tk.Button(app, text='予定を出力', command=btn_click1)
 btn1.place(x=30, y=140)
 
@@ -83,13 +98,18 @@ def btn_click2():
     add_todo(todo1, text)
 
 btn2 = tk.Button(app, text='予定を追加', command=btn_click2)
-btn2.place(x=30, y=170)
+btn2.place(x=30, y=200)
 
 #予定を削除
 def btn_click3():
-    index = int(input("削除するToDoの番号を入力してください: "))
-    delete_todo(todo1, index)
+    global todo_delete
+    todo_delete = txt3.get()
+    #index = int(input("削除するToDoの番号を入力してください: "))
+    delete_todo(todo1, int(todo_delete))
+    for i, todo in enumerate(todo1):
+        print(f"{i}: {todo}")
+        mb.showinfo(f'予定を出力', f"[{i}]{todo}")
 btn3 = tk.Button(app, text='予定を削除', command=btn_click3)
-btn3.place(x=30, y=200)
+btn3.place(x=30, y=260)
 
 app.mainloop()
